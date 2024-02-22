@@ -40,9 +40,15 @@ void setup() {
 
 void loop() {
   if (!courseDone && digitalRead(switchPin) == LOW) {
-    forward(5);
+    forward(3);
     delay(1000);
-    backward(5);
+    backward(3);
+    delay(1000);
+    right(3);
+    delay(1000);
+    left(3);
+    delay(1000);
+    rotateCW(5);
     courseDone = true; 
   }
 }
@@ -80,6 +86,66 @@ void backward(int time){
   digitalWrite(AI1_left, HIGH);
   digitalWrite(BI1_left, HIGH);
   digitalWrite(BI2_left, LOW);
+  analogWrite(PWMB_left, 255);
+
+  delay(time * 1000);
+
+  stop();
+}
+
+void right(int time){
+  analogWrite(PWMA_right, 255);
+  digitalWrite(AI2_right, LOW);
+  digitalWrite(AI1_right, HIGH);
+  digitalWrite(BI1_right, LOW);
+  digitalWrite(BI2_right, HIGH);
+  analogWrite(PWMB_right, 255);
+
+  analogWrite(PWMA_left, 255);
+  digitalWrite(AI2_left, HIGH);
+  digitalWrite(AI1_left, LOW);
+  digitalWrite(BI1_left, HIGH);
+  digitalWrite(BI2_left, LOW);
+  analogWrite(PWMB_left, 255);
+
+  delay(time * 1000);
+
+  stop();
+}
+
+void left(int time){
+  analogWrite(PWMA_right, 255);
+  digitalWrite(AI2_right, HIGH);
+  digitalWrite(AI1_right, LOW);
+  digitalWrite(BI1_right, HIGH);
+  digitalWrite(BI2_right, LOW);
+  analogWrite(PWMB_right, 255);
+
+  analogWrite(PWMA_left, 255);
+  digitalWrite(AI2_left, LOW);
+  digitalWrite(AI1_left, HIGH);
+  digitalWrite(BI1_left, LOW);
+  digitalWrite(BI2_left, HIGH);
+  analogWrite(PWMB_left, 255);
+
+  delay(time * 1000);
+
+  stop();
+}
+
+void rotateCW(int time){
+  analogWrite(PWMA_right, 255);
+  digitalWrite(AI2_right, LOW);
+  digitalWrite(AI1_right, HIGH);
+  digitalWrite(BI1_right, HIGH);
+  digitalWrite(BI2_right, LOW);
+  analogWrite(PWMB_right, 255);
+
+  analogWrite(PWMA_left, 255);
+  digitalWrite(AI2_left, HIGH);
+  digitalWrite(AI1_left, LOW);
+  digitalWrite(BI1_left, LOW);
+  digitalWrite(BI2_left, HIGH);
   analogWrite(PWMB_left, 255);
 
   delay(time * 1000);
