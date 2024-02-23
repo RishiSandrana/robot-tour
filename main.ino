@@ -21,7 +21,7 @@ bool courseDone = false;
 void setup() {
   pinMode(switchPin, INPUT_PULLUP);
 
-  attachInterrupt(digitalPinToInterrupt(switchPin), stop, FALLING);
+  // attachInterrupt(digitalPinToInterrupt(switchPin), stop, FALLING);
 
   pinMode(PWMA_right, OUTPUT);
   pinMode(AI2_right, OUTPUT);
@@ -39,21 +39,25 @@ void setup() {
 }
 
 void loop() {
+  // forward(2) -> Moves forward 50cm
+  // backward(2) -> Moves backward 50cm
+  // right(2.4) -> Moves right 50cm
+  // left(2.4) -> Moves left 50cm
+  // rotateCW(5) -> 360 degree rotation
+  // rotateCW(1.45) -> 90 degree rotation
   if (!courseDone && digitalRead(switchPin) == LOW) {
-    forward(3);
+    forward(2);
     delay(1000);
-    backward(3);
+    backward(2);
     delay(1000);
-    right(3);
+    right(2.4);
     delay(1000);
-    left(3);
-    delay(1000);
-    rotateCW(5);
+    left(2.4);
     courseDone = true; 
   }
 }
 
-void forward(int time) {
+void forward(float time) {
   analogWrite(PWMA_right, 255);
   digitalWrite(AI2_right, HIGH);
   digitalWrite(AI1_right, LOW);
@@ -73,7 +77,7 @@ void forward(int time) {
   stop();
 }
 
-void backward(int time){
+void backward(float time){
   analogWrite(PWMA_right, 255);
   digitalWrite(AI2_right, LOW);
   digitalWrite(AI1_right, HIGH);
@@ -93,7 +97,7 @@ void backward(int time){
   stop();
 }
 
-void right(int time){
+void right(float time){
   analogWrite(PWMA_right, 255);
   digitalWrite(AI2_right, LOW);
   digitalWrite(AI1_right, HIGH);
@@ -113,7 +117,7 @@ void right(int time){
   stop();
 }
 
-void left(int time){
+void left(float time){
   analogWrite(PWMA_right, 255);
   digitalWrite(AI2_right, HIGH);
   digitalWrite(AI1_right, LOW);
@@ -133,7 +137,7 @@ void left(int time){
   stop();
 }
 
-void rotateCW(int time){
+void rotateCW(float time){
   analogWrite(PWMA_right, 255);
   digitalWrite(AI2_right, LOW);
   digitalWrite(AI1_right, HIGH);
