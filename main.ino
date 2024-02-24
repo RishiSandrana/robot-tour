@@ -43,13 +43,13 @@ void loop() {
   // backward(2) -> Moves backward 50cm
   // right(2.4) -> Moves right 50cm
   // left(2.4) -> Moves left 50cm
-  // rotateCW(5) -> 360 degree rotation
-  // rotateCW(1.45) -> 90 degree rotation
+  // rotateCW(5.25) -> 360 degree rotation clockwise
+  // rotateCW(1.5) -> 90 degree rotation clockwise
+  // rotateCCW(5.25) -> 360 degree rotation counter-clockwise
+  // rotateCCW(1.5) -> 90 degree rotation counter-clockwise
+
   if (!courseDone && digitalRead(switchPin) == LOW) {
-    forward(2);
-    delay(1000);
-    backward(2);
-    delay(1000);
+    // Insert code here 
     right(2.4);
     delay(1000);
     left(2.4);
@@ -150,6 +150,26 @@ void rotateCW(float time){
   digitalWrite(AI1_left, LOW);
   digitalWrite(BI1_left, LOW);
   digitalWrite(BI2_left, HIGH);
+  analogWrite(PWMB_left, 255);
+
+  delay(time * 1000);
+
+  stop();
+}
+
+void rotateCCW(float time){
+  analogWrite(PWMA_right, 255);
+  digitalWrite(AI2_right, HIGH);
+  digitalWrite(AI1_right, LOW);
+  digitalWrite(BI1_right, LOW);
+  digitalWrite(BI2_right, HIGH);
+  analogWrite(PWMB_right, 255);
+
+  analogWrite(PWMA_left, 255);
+  digitalWrite(AI2_left, LOW);
+  digitalWrite(AI1_left, HIGH);
+  digitalWrite(BI1_left, HIGH);
+  digitalWrite(BI2_left, LOW);
   analogWrite(PWMB_left, 255);
 
   delay(time * 1000);
